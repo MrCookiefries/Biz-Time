@@ -1,0 +1,29 @@
+{
+  "name": "biztime",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrCookiefries/Biz-Time.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrCookiefries/Biz-Time/issues"
+  },
+  "homepage": "https://github.com/MrCookiefries/Biz-Time#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.7.1"
+  },
+  "devDependencies": {
+    "jest": "^27.2.1",
+    "supertest": "^6.1.6"
+  }
+}
