@@ -3,15 +3,13 @@
  *
  *  The error-handling middleware will return this.
  */
-
 class ExpressError extends Error {
-  constructor(message, status) {
+  constructor(status, message) {
     super();
     this.message = message;
     this.status = status;
-    console.error(this.stack);
+    if (process.env.NODE_ENV !== "test") console.error(this.stack);
   }
 }
 
-
-module.exports = ExpressError;
+export default ExpressError;
