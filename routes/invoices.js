@@ -1,7 +1,7 @@
-import express from "express";
+const express = require("express");
 const router = new express.Router();
-import Invoice from "../models/invoice.js";
-import Company from "../models/company.js";
+const Invoice = require("../models/invoice");
+const Company = require("../models/company");
 
 router.get("/", async (req, res, next) => {
     try {
@@ -27,7 +27,7 @@ router.get("/:id", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
     try {
         const invoice = await Invoice.postNew(req.body);
-        return res.status(200).json({invoice});
+        return res.status(201).json({invoice});
     } catch (err) {
         return next(err);
     }
@@ -51,4 +51,4 @@ router.delete("/:id", async (req, res, next) => {
     }
 });
 
-export default router;
+module.exports = router;

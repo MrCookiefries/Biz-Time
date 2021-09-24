@@ -1,16 +1,19 @@
 /** BizTime express application. */
 
-import express from "express";
-import ExpressError from "./expressError.js";
+const express = require("express");
+const ExpressError = require("./expressError");
 
 const app = express();
 app.use(express.json());
 
-import companyRoutes from "./routes/companies.js";
+const companyRoutes = require("./routes/companies");
 app.use("/companies", companyRoutes);
 
-import invoiceRoutes from "./routes/invoices.js";
+const invoiceRoutes = require("./routes/invoices");
 app.use("/invoices", invoiceRoutes);
+
+const industryRoutes = require("./routes/industries");
+app.use("/industries", industryRoutes);
 
 /** 404 handler */
 app.use((req, res, next) => {
@@ -28,4 +31,4 @@ app.use((err, req, res, next) => {
 	});
 });
 
-export default app;
+module.exports = app;

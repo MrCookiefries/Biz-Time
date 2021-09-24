@@ -1,7 +1,6 @@
 /** Database setup for BizTime. */
 
-import pg from "pg";
-const {Client} = pg;
+const {Client} = require("pg");
 
 const config = {
     host: "localhost",
@@ -13,4 +12,4 @@ const config = {
 const db = new Client(config);
 db.connect();
 
-export default db;
+module.exports = db;

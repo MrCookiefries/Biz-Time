@@ -1,6 +1,6 @@
 /** Server startup for BizTime. */
 
-import app from "./app.js";
+const app = require("./app");
 
 const portNum = 3000;
 

@@ -1,5 +1,5 @@
-import db from "../db.js";
-import ExpressError from "../expressError.js";
+const db = require("../db");
+const ExpressError = require("../expressError");
 
 class Invoice {
     static async getAll() {
@@ -29,13 +29,17 @@ class Invoice {
         );
         return result.rows[0];
     }
-    static async putOne(id, {amt}) {
-        await this.checkId(id);
+    static async putOne(id, {amt, paid}) {
+        const currentInvoice = await this.checkId(id);
+        let paidDate = currentInvoice.paid_date;
+        if (currentInvoice.paid !== paid) {
+            paidDate = paid ? new Date(): null;
+        }
         const result = await db.query(
-            `UPDATE invoices SET amt = $2
+            `UPDATE invoices SET amt = $2, paid = $3, paid_date = $4
             WHERE id = $1
             RETURNING id, comp_code, amt, paid, add_date, paid_date`,
-            [id, amt]
+            [id, amt, paid, paidDate]
         );
         return result.rows[0];
     }
@@ -58,4 +62,4 @@ class Invoice {
     }
 }
 
-export default Invoice;
+module.exports = Invoice;

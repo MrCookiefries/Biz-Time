@@ -1,7 +1,8 @@
-import express from "express";
+const express = require("express");
 const router = new express.Router();
-import Company from "../models/company.js";
-import Invoice from "../models/invoice.js";
+const Company = require("../models/company");
+const Invoice = require("../models/invoice");
+const Industry = require("../models/industry");
 
 router.get("/", async (req, res, next) => {
     try {
@@ -16,7 +17,9 @@ router.get("/:code", async (req, res, next) => {
     try {
         const company = await Company.checkCode(req.params.code);
         const invoices = await Invoice.getByCompany(company.code);
+        const industries = await Industry.getByCompany(company.code);
         company.invoices = invoices;
+        company.industries = industries;
         return res.status(200).json({company});
     } catch (err) {
         return next(err);
@@ -50,4 +53,4 @@ router.delete("/:code", async (req, res, next) => {
     }
 });
 
-export default router;
+module.exports = router;
